@@ -1,5 +1,1 @@
-[
-  { "name": "1-cover.jpg", "query": "?shot=cover&photo=pier&caption=Sunset%20Heist", "w": 1080, "h": 1080 },
-  { "name": "2-editor.jpg", "query": "?shot=editor&photo=boulevard&caption=Boulevard%20Queen", "w": 1280, "h": 720 },
-  { "name": "3-cover.jpg", "query": "?shot=cover&photo=boulevard&caption=Boulevard%20Queen", "w": 1080, "h": 1080 }
-]
+[{"h": 1080, "name": "1-cover.jpg", "query": "?shot=cover&layout=triptych&preset=sunset&photos=pier,boulevard,pier&title=Vice%20Nights&subtitle=A%20heist%20in%20the%20sun&w=1080&h=1080", "w": 1080}, {"h": 720, "name": "2-editor.jpg", "query": "?shot=editor&layout=diagonal2&preset=neon&photos=pier,boulevard&title=Neon%20Run&subtitle=Midnight%20on%20Ocean%20Drive", "w": 1280}, {"h": 1080, "name": "3-cover.jpg", "query": "?shot=cover&layout=grid4&preset=dusk&photos=boulevard,pier,pier,boulevard&title=Palm%20Dusk&subtitle=Four%20ways%20down&w=1080&h=1350", "w": 864}, {"h": 720, "name": "4-cover.jpg", "query": "?shot=cover&layout=diagonal2&preset=neon&photos=pier,boulevard&title=Neon%20Run&subtitle=Midnight%20on%20Ocean%20Drive&w=1920&h=1080", "w": 1280}]

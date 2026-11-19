@@ -3,20 +3,66 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Vice Nights — GTA VI-style Cover Maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
+  <section class="controls" aria-label="Cover controls">
+    <h1>VICE NIGHTS</h1>
+    <p class="tag">A GTA VI-style multi-panel cover maker. Pick photos, set the layout and grade, export a poster PNG.</p>
+
+    <label>Title <input id="title" type="text" maxlength="24" value="Vice Nights"></label>
+    <label>Subtitle <input id="subtitle" type="text" maxlength="40" value="A heist in the sun"></label>
+
+    <fieldset><legend>Layout</legend>
+      <div class="row">
+        <button type="button" data-layout="hero">1 · Hero</button>
+        <button type="button" data-layout="diagonal2">2 · Diagonal</button>
+        <button type="button" data-layout="triptych">3 · Triptych</button>
+        <button type="button" data-layout="grid4">4 · Grid</button>
+      </div>
+    </fieldset>
+
+    <fieldset><legend>Colour grade</legend>
+      <div class="row">
+        <button type="button" data-preset="sunset">Vice City Sunset</button>
+        <button type="button" data-preset="neon">Neon Nights</button>
+        <button type="button" data-preset="dusk">Palm Dusk</button>
+      </div>
+    </fieldset>
+
+    <fieldset><legend>Panels — <span id="panelLabel">Panel 1</span></legend>
+      <div class="row">
+        <button type="button" data-panel="0">Panel 1</button>
+        <button type="button" data-panel="1">Panel 2</button>
+        <button type="button" data-panel="2">Panel 3</button>
+        <button type="button" data-panel="3">Panel 4</button>
+      </div>
+      <div class="row">
+        <button type="button" data-photo="pier">Sample: Pier</button>
+        <button type="button" data-photo="boulevard">Sample: Boulevard</button>
+      </div>
+      <label class="upload">Upload a photo for this panel <input id="upload" type="file" accept="image/*"></label>
+      <button type="button" id="sameAll">Use this photo in every panel</button>
+      <label>Zoom <span id="zoomVal">100%</span>
+        <input id="zoom" type="range" min="1" max="2.5" step="0.05" value="1"></label>
+      <label>Position X <input id="ox" type="range" min="-1" max="1" step="0.05" value="0"></label>
+      <label>Position Y <input id="oy" type="range" min="-1" max="1" step="0.05" value="0"></label>
+    </fieldset>
+
+    <label>Export size
+      <select id="size">
+        <option value="0">1080 × 1080 (square)</option>
+        <option value="1">1080 × 1350 (portrait)</option>
+        <option value="2">1920 × 1080 (wide)</option>
+      </select>
+    </label>
+    <button id="export" type="button" class="primary">Export PNG</button>
     <p id="status" role="status"></p>
+    <p class="fine">Fan-made cover tool. No Rockstar artwork, logo or font is used. Display type: Anton (SIL OFL), vendored in app/fonts/.</p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+  <canvas id="cover" width="1080" height="1080" aria-label="The cover poster"></canvas>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
