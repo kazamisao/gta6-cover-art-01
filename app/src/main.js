@@ -40,8 +40,14 @@ export function loadImage(url) {
 
 async function loadPanel(i) {
   const p = state.panels[i];
-  if (uploads[i]) { images[i] = await loadImage(uploads[i]); return; }
-  images[i] = await loadImage(`samples/${p.photo}.jpg`);
+  try {
+    if (uploads[i]) { images[i] = await loadImage(uploads[i]); return; }
+    images[i] = await loadImage(`samples/${p.photo}.jpg`);
+  } catch {
+    // One failed photo must not blank the whole poster: leave this
+    // panel empty and let the others render.
+    images[i] = null;
+  }
 }
 
 export async function loadAllPanels() {
@@ -78,6 +84,7 @@ document.querySelectorAll('[data-photo]').forEach((b) => b.addEventListener('cli
 }));
 document.getElementById('upload').addEventListener('change', async (e) => {
   const file = e.target.files[0]; if (!file) return;
+  e.target.value = ''; // allow picking the same file again
   uploads[selectedPanel] = URL.createObjectURL(file);
   await loadPanel(selectedPanel); syncControls(); redraw();
   status.textContent = `Photo loaded into panel ${selectedPanel + 1}.`;
@@ -114,5 +121,5 @@ if (shot) {
     setSize: (w, h) => { exportSize = { label: '', w, h }; },
   });
 } else {
-  (async () => { await loadAllPanels(); syncControls(); redraw(); })();
+  (async () => { await loadAllPanels(); syncControls(); redraw(); })().catch(() => { /* startup must never leave an unhandled rejection */ });
 }

@@ -89,13 +89,16 @@ export function drawCover(canvas, images, state) {
   ctx.lineWidth = Math.max(3, size * 0.06); ctx.strokeStyle = 'rgba(0,0,0,0.55)';
   ctx.strokeText(title, w * 0.06, h - h * 0.085);
   ctx.fillStyle = p.title; ctx.fillText(title, w * 0.06, h - h * 0.085);
-  // Subtitle, letterspaced.
+  // Subtitle, letterspaced — shrink to fit like the title.
   const sub = (state.subtitle || '').trim().toUpperCase();
   if (sub) {
-    const ss = Math.max(13, h * 0.026);
+    const spaced = sub.split('').join('\u2009');
+    let ss = Math.max(13, h * 0.026);
+    const subFit = () => { ctx.font = `700 ${ss}px system-ui, sans-serif`; return ctx.measureText(spaced).width; };
+    while (subFit() > w * 0.88 && ss > 10) ss -= 1;
     ctx.font = `700 ${ss}px system-ui, sans-serif`;
     ctx.fillStyle = p.accent;
-    ctx.fillText(sub.split('').join('\u2009'), w * 0.06, h - h * 0.028);
+    ctx.fillText(spaced, w * 0.06, h - h * 0.028);
   }
 }
 
